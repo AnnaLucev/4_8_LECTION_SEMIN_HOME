@@ -4,6 +4,7 @@ Console.WriteLine("2 - Программа для нахождения строк
 Console.WriteLine("3 - Программа для нахождения произведения двух матриц (задача 58)");
 Console.WriteLine("4 - Программа для вывода с индексами трехмерного массива из неповторяющихся двухзначных чисел (задача 60)");
 Console.WriteLine("5 - Программа для спирального заполнения массива 4 на 4 (задача 62)");
+Console.WriteLine("6 - Программа для вывода на экран раснобедренного треугольника Паскаля N строк (задача 61)");
 
 
 int numberOfTask = Prompt("Введите номер задачи ");
@@ -26,8 +27,12 @@ switch (numberOfTask)
     break;
 
     case 5:
-    //FourRandomArray(4,4);
-    ReadArray(FourSpiralArray(4,4));
+    //FourRandomArray(4);
+    ReadArray(SpiralArray(4,4));
+    break;
+
+    case 6:
+    TrianglePascale(9);
     break;
 
     default:
@@ -265,41 +270,210 @@ void ReadThreeArrayIndex(int[,,] array)            // функция вывод�
 // 11 16 15 06
 // 10 09 08 07
 
-int [,] FourSpiralArray(int m,int n)     // функция формирования спирального массива 
+int [] FillOneArray(int a, int b) // функция задания одномерного массива
 {
-    int[,] spiralArrayarray = new int[n, m];
- 
-    int row = 0;
-    int col = 0;
-    int dx = 1;
-    int dy = 0;
-    int dirChanges = 0;
-    int visits = m;
+    int[] array = new int[a*b];
+    int e = 0;
 
-    for (int i = 0; i < spiralArrayarray.Length; i++) 
+    for (int i = 0; i < a*b; i++)
     {
-        spiralArrayarray[row, col] = i + 1;
-        if (--visits == 0) 
-        {
-            visits = m * (dirChanges %2) + n * ((dirChanges + 1) %2) - (dirChanges/2 - 1) - 2;
-            int temp = dx;
-            dx = -dy;
-            dy = temp;
-            dirChanges++;
-        }
-        col += dx;
-        row += dy;
-    } return spiralArrayarray;
+        e += 1;
+        array[i] = e;
+        //Console.Write(array[i] + " ");
+    } return array;
 }
+
+int[,] SpiralArray(int a, int b)      // спиральная матрица слева направо
+{
+    int[] arr = FillOneArray(a,b);
+    int[,] spiralArray = new int[a, b];
+    int top = 0, bottom = a - 1;
+    int left = 0, right = b - 1;
+    int index = 0;
+
+    while ((bottom >= 0) && (right >= 0))
+    //while (1)
+    {
+        if (left > right)  break;
+        for (int i = left; i <= right; i++)    // печатаем верхнюю строку
+        {
+            spiralArray[top, i] = arr[index++];
+        }
+        top++;
+
+        if (top > bottom) break;
+        for (int i = top; i <= bottom; i++)     // печатаем правый столбец
+        {       
+            spiralArray[i, right] = arr[index++];
+        }
+        right--;
+
+        if (left > right) break;
+        for (int i = right; i >= left; i--)    // печатаем нижнюю строку
+        {
+            spiralArray[bottom, i] = arr[index++];
+        }
+        bottom--;
+
+        if (top > bottom) break;
+        for (int i = bottom; i >= top; i--)     // печатаем левый столбец
+        {
+            spiralArray[i, left] = arr[index++];
+        }
+        left++;
+    } return spiralArray;
+}
+
+// int [,] SpiralArray(int m,int n)     // функция формирования спирального массива 
+// {
+//     int[,] spiralArray = new int[n, m];
+ 
+//     int row = 0;
+//     int col = 0;
+//     int dx = 1;
+//     int dy = 0;
+//     int dirChanges = 0;
+//     int visits = m;
+
+//     for (int i = 0; i < spiralArray.Length; i++) 
+//     {
+//         spiralArray[row, col] = i + 1;
+//         if (--visits == 0) 
+//         {
+//             visits = m * (dirChanges %2) + n * ((dirChanges + 1) %2) - (dirChanges/2 - 1) - 2;
+//             int temp = dx;
+//             dx = -dy;
+//             dy = temp;
+//             dirChanges++;
+//         }
+//         col += dx;
+//         row += dy;
+//     } return spiralArray;
+// }
+
+// int[,] SpiralArray(int a, int b)      // спиральная матрица слева направо
+// {
+//     int[,] spiralArray = FillArray(a,b);
+//     Console.WriteLine("\n");
+//     int maxX = spiralArray.GetLength(0);
+//     int maxY = spiralArray.GetLengt(1)-1;
+//     int dirX = 1;
+//     int dirY = 1;
+
+//     int x = -1;
+//     int y = 0;
+//     int val = 1;
+//     while ((maxX >= 0) && (maxY >= 0))
+//     {
+//         for (int xval = 1; xval <= maxX; xval++)         // задаем первый столбец 01-02--
+//         {
+//             spiralArray[x + dirX * xval, y] = val;
+//             val++;
+//         }
+//         x = x + dirX * maxX;
+//         dirX = -dirX;
+//         maxX--;
+
+//         for (int yval = 1; yval <= maxY; yval++)
+//         {
+//             spiralArray[x, y + dirY*yval] = val;
+//             val++;
+//         }
+
+//         y = y + dirY * maxY;
+//         dirY = -dirY;
+//         maxY--;
+
+//     } return spiralArray;
+// }
+// int [,] FillArray(int a, int b) // функция задания двумерного массива
+// {
+//     int[,] array = new int[a, b];
+//     int e = 0;
+
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         Console.WriteLine();
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             e += 1;
+//             array[i, j] = e;
+//             Console.Write(array[i, j] + " ");
+//         }
+//     } return array;
+// }
 
 
 // Задача 61: Вывести первые N строк треугольника Паскаля. 
 // Сделать вывод в виде равнобедренного треугольника.
 
+void TrianglePascale(int row)
+{
+    int [,] triangle = FillTriangle(row);
+    PrintTriangle (triangle, row);
+    Console.ReadLine();
+    EmptyRows(row);
+    Magic(triangle, row);
+    Console.ReadLine();
+}
 
+int [,] FillTriangle(int row)
+{
+    int [,] triangle = new int [row, row];
+    for (int i = 0; i < row; i++)
+    {
+        triangle [i,0] = 1;
+        triangle [i,i] = 1;
+    }
+    for (int i = 2; i < row; i++)
+    {
+        for (int j = 1; j < i+1; j++)
+        {
+            triangle [i,j] = triangle [i-1, j-1] + triangle [i-1, j];
+        }
+    } return triangle;
+}
 
+void PrintTriangle (int [,] triangle, int row)
+{
+    const int cellWidth = 3;
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < row; j++) 
+        {
+            if (triangle[i,j] !=0)
+                Console.Write($"{triangle[i,j], cellWidth}"); 
+        }
+        Console.WriteLine();
+    }
+}
 
+void Magic (int [,] triangle, int row)
+{
+    const int cellWidth = 2;
+    int col = cellWidth * row;
+    for (int i = 0; i <= row; i++)
+    {
+        for (int j = 0; j <= i; j++) 
+        {
+            Console.SetCursorPosition(col, i+1);
+            if (triangle[i,j] !=0) Console.Write($"{triangle[i,j], cellWidth}");
+            col += cellWidth *2;
+        }
+        col = cellWidth * row - cellWidth *(i+1);
+        Console.WriteLine();
+    }
+}
 
+void EmptyRows(int row)
+{
+    int a = 0;
+    while (a < row+2) 
+    {
+        Console.WriteLine();
+        a++;
+    }
+}
 
 
 
@@ -347,6 +521,8 @@ int [,] FourSpiralArray(int m,int n)     // функция формирован�
 //         }
 //     } return array;
 // }
+
+
 // for (int i = 0; i < array.GetLength(0); i++)
 // {
 //     Console.WriteLine();
