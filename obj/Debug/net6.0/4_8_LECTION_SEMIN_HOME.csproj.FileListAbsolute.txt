@@ -1,0 +1,5 @@
+C:\Users\user\Documents\!_РАЗРАБОТЧИК\3_Знакомство с языками программирования\4_8_LECTION_SEMIN_HOME\obj\Debug\net6.0\4_8_LECTION_SEMIN_HOME.csproj.AssemblyReference.cache
+C:\Users\user\Documents\!_РАЗРАБОТЧИК\3_Знакомство с языками программирования\4_8_LECTION_SEMIN_HOME\obj\Debug\net6.0\4_8_LECTION_SEMIN_HOME.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\!_РАЗРАБОТЧИК\3_Знакомство с языками программирования\4_8_LECTION_SEMIN_HOME\obj\Debug\net6.0\4_8_LECTION_SEMIN_HOME.AssemblyInfoInputs.cache
+C:\Users\user\Documents\!_РАЗРАБОТЧИК\3_Знакомство с языками программирования\4_8_LECTION_SEMIN_HOME\obj\Debug\net6.0\4_8_LECTION_SEMIN_HOME.AssemblyInfo.cs
+C:\Users\user\Documents\!_РАЗРАБОТЧИК\3_Знакомство с языками программирования\4_8_LECTION_SEMIN_HOME\obj\Debug\net6.0\4_8_LECTION_SEMIN_HOME.csproj.CoreCompileInputs.cache
